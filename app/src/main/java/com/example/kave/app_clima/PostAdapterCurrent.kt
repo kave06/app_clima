@@ -19,7 +19,7 @@ class PostAdapterCurrentTemp(dataSet: List<PostCurrentTemp>) : RecyclerView.Adap
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val titleTextView = view.findViewById<TextView>(R.id.title_text_view) as TextView
         val bodyTextView = view.findViewById<TextView>(R.id.body_text_view) as TextView
-        var bodyFloatView = view.findViewById<EditText>(R.id.current_temp) as EditText
+//        var bodyFloatView = view.findViewById<EditText>(R.id.current_temp) as EditText
 
     }
 
