@@ -14,9 +14,10 @@ import com.github.kittinunf.fuel.core.FuelError
 class MainActivity : AppCompatActivity() {
 
     lateinit var recyclerView : RecyclerView
-    lateinit var recycletViewAdapter : RecyclerView.Adapter<PostAdapter.ViewHolder>
+    lateinit var recycletViewAdapter : RecyclerView.Adapter<PostAdapterCurrent.ViewHolder>
     lateinit var recyclerViewLayoutManager : RecyclerView.LayoutManager
-    var adapter: PostAdapter? = null
+    var adapter: PostAdapterCurrent? = null
+//    var adapter: PostAdapter? = null
 
 
 
@@ -53,28 +54,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getData(){
-        val posts = "https://jsonplaceholder.typicode.com/posts"
+//        val posts = "https://jsonplaceholder.typicode.com/posts"
+        val posts = "http://157.88.58.134:5578/current"
         getRequest(posts,success = { response ->
 
             val parser = Parser()
             val stringBuilder = StringBuilder(response)
             val model =  parser.parse(stringBuilder) as JsonArray<JsonObject>
-            val postModel  = model.map { PostModel(it)}.filterNotNull()
+//            val postModel  = model.map { PostModel(it)}.filterNotNull()
+            val postCurrent  = model.map { PostCurrent(it)}.filterNotNull()
 
-            this.adapter = PostAdapter(postModel)
+            this.adapter = PostAdapterCurrent(postCurrent)
             recycletViewAdapter = adapter!!
             recyclerView.adapter = recycletViewAdapter
             recycletViewAdapter.notifyDataSetChanged()
             adapter?.onClick = { view ->
 
                 val itemPosition = recyclerView.getChildLayoutPosition(view)
-                Log.d("ITEM:POSITION",postModel[itemPosition].body)
+                Log.d("ITEM:POSITION",postCurrent[itemPosition].currentDate)
             }
 
-            Log.d("code",postModel.first().body)
-            Log.d("Mapped::",postModel.first().title)
-            Log.d("dode",postModel.first().userId.toString())
-            Log.d("Mapped::",postModel.first().id.toString())
+//            Log.d("code", postCurrent.first().currentTemp)
+//            Log.d("code", postCurrent.first().currentHumi)
+
+//            Log.d("code",postModel.first().body)
+//            Log.d("Mapped::",postModel.first().title)
+//            Log.d("dode",postModel.first().userId.toString())
+//            Log.d("Mapped::",postModel.first().id.toString())
 
         },failure ={ error ->
 

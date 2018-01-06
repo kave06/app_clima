@@ -16,28 +16,29 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Title"
-                android:textAlignment="center"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
             <!--<TextView-->
                 <!--android:id="@+id/body_text_view"-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="match_parent"-->
                 <!--android:text="Body" />-->
 
-            <EditText
-                android:id="@+id/current_temp"
+            <TextView
+                android:id="@+id/textView_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="numberDecimal" />
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView_humidity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
 
         </LinearLayout>
 
