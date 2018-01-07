@@ -11,7 +11,21 @@ import com.beust.klaxon.Parser
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelError
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.widget.Toast;
+import com.example.kave.app_clima.R.id.thermometer
+import kotlinx.android.synthetic.main.activity_main.*
+
+import kotlin.concurrent.*
+
 class MainActivity : AppCompatActivity() {
+
+//    private lateinit var thermometer: Thermometer
+    private var temperature: Float = 0.toFloat()
 
     lateinit var recyclerView : RecyclerView
     lateinit var recycletViewAdapter : RecyclerView.Adapter<PostAdapterCurrent.ViewHolder>
@@ -19,14 +33,16 @@ class MainActivity : AppCompatActivity() {
     var adapter: PostAdapterCurrent? = null
 //    var adapter: PostAdapter? = null
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var thermometer: Thermometer = findViewById(R.id.thermometer)
+
         setupViews()
-        getData()
+        val timer = fixedRateTimer(period=60000.toLong(), daemon=true) {
+            getData()
+        }
 
     }
 
@@ -81,6 +97,13 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("Mapped::",postModel.first().title)
 //            Log.d("dode",postModel.first().userId.toString())
 //            Log.d("Mapped::",postModel.first().id.toString())
+
+            print(postCurrent.first().currentTemp)
+            print(postCurrent.first().currentHumi)
+
+            var temp: Double = 27.5
+            temperature = temp.toFloat()
+            thermometer!!.setCurrentTemp(temperature)
 
         },failure ={ error ->
 
