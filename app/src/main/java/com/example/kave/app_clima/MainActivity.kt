@@ -2,6 +2,7 @@ package com.example.kave.app_clima
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.widget.CircularProgressDrawable
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -11,20 +12,13 @@ import com.beust.klaxon.Parser
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelError
 
-import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.widget.Toast;
-import com.example.kave.app_clima.R.id.thermometer
 import kotlinx.android.synthetic.main.activity_main.*
+//import android.support.v4.widget.SwipeRefreshLayout
 
 import kotlin.concurrent.*
 
 class MainActivity : AppCompatActivity() {
 
-//    private lateinit var thermometer: Thermometer
     private var temperature: Float = 0.toFloat()
 
     lateinit var recyclerView : RecyclerView
@@ -33,10 +27,15 @@ class MainActivity : AppCompatActivity() {
     var adapter: PostAdapterCurrent? = null
 //    var adapter: PostAdapter? = null
 
+//    var mSwipeRefreshLayout: SwipeRefreshLayout? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        mSwipeRefreshLayout = findViewById(R.id.srlContainer) as SwipeRefreshLayout
+
+//        var c3: CircularProgressBar = findViewById(R.id.circularprogressbar1)
         var thermometer: Thermometer = findViewById(R.id.thermometer)
 
         setupViews()
@@ -90,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("ITEM:POSITION",postCurrent[itemPosition].currentDate)
             }
 
-//            Log.d("code", postCurrent.first().currentTemp)
+            Log.d("code", postCurrent.first().currentTemp.toString())
 //            Log.d("code", postCurrent.first().currentHumi)
 
 //            Log.d("code",postModel.first().body)
@@ -98,12 +97,25 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("dode",postModel.first().userId.toString())
 //            Log.d("Mapped::",postModel.first().id.toString())
 
-            print(postCurrent.first().currentTemp)
-            print(postCurrent.first().currentHumi)
 
-            var temp: Double = 27.5
-            temperature = temp.toFloat()
-            thermometer!!.setCurrentTemp(temperature)
+//            var temp: Double = 27.5
+//            temperature = temp.toFloat()
+//            thermometer!!.setCurrentTemp(temperature)
+
+            var c3: CircularProgressBar = findViewById(R.id.circularprogressbar1)
+            var hum: Int? = postCurrent.first().currentHumi!!.toInt()
+            c3.setTitle("$hum %")
+            c3.setSubTitle("Humedad")
+//            c3.setProgress(hum)
+            hum?.let { c3.setProgress(it) }
+
+            var temp2: Double? = postCurrent.first().currentTemp
+            temperature = temp2!!.toFloat()
+            thermometer.setCurrentTemp(temperature)
+
+
+
+
 
         },failure ={ error ->
 
