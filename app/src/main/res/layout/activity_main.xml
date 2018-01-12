@@ -43,6 +43,13 @@
         app:cpb_progressColor="#1684ce"
         app:cpb_titleColor="#1684ce" />
 
+    <Button
+        android:id="@+id/button_chart_temperature"
+        tools:context="com.example.kave.app_clima.ChartTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chart temperature" />
+
     <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"
     android:layout_height="match_parent"

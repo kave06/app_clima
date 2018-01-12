@@ -1,14 +1,11 @@
 package com.example.kave.app_clima
 
-import android.content.Context
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.CircularProgressDrawable
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.widget.Button
 import android.widget.TextView
 import com.beust.klaxon.JsonArray
 import com.beust.klaxon.JsonObject
@@ -18,13 +15,11 @@ import com.github.kittinunf.fuel.core.FuelError
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.chart_temperature.*
 //import android.support.v4.widget.SwipeRefreshLayout
-import android.view.View
 
 import kotlin.concurrent.*
 
-class MainActivity : AppCompatActivity() {
+class ChartTemperature : AppCompatActivity() {
 
     private var temperature: Float = 0.toFloat() //inicializo temperaura como float
 
@@ -38,28 +33,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.chart_temperature)
 
 //        mSwipeRefreshLayout = findViewById(R.id.srlContainer) as SwipeRefreshLayout
 
 //        var c3: CircularProgressBar = findViewById(R.id.circularprogressbar1)
-        var thermometer: Thermometer = findViewById(R.id.thermometer)
 
         setupViews()
         val timer = fixedRateTimer(period=60000.toLong(), daemon=true) {
             getData()
         }
 
-        var btn : Button = findViewById(R.id.button_chart_temperature)
-        btn.setOnClickListener{
-            var intent : Intent = Intent(this,ChartTemperature::class.java)
-            startActivity(intent)
-        }
-
     }
 
     fun setupViews(){
-        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView = findViewById(R.id.recycler_view_chart_temperature)
         recyclerViewLayoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = recyclerViewLayoutManager
     }
@@ -82,8 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getData(){
-//        val posts = "https://jsonplaceholder.typicode.com/posts"
-        val posts = "http://157.88.58.134:5578/current"
+        val posts = "http://157.88.58.134:5578/ambient/days/1"
         getRequest(posts,success = { response ->
 
             val parser = Parser()
@@ -105,37 +92,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             Log.d("code", postCurrent.first().currentTemp.toString())
-//            Log.d("code", postCurrent.first().currentHumi)
-
-//            Log.d("code",postModel.first().body)
-//            Log.d("Mapped::",postModel.first().title)
-//            Log.d("dode",postModel.first().userId.toString())
-//            Log.d("Mapped::",postModel.first().id.toString())
-
-
-//            var temp: Double = 27.5
-//            temperature = temp.toFloat()
-//            thermometer!!.setCurrentTemp(temperature)
-
-            var c3: CircularProgressBar = findViewById(R.id.circularprogressbar1)
-            var hum =  postCurrent.first().currentHumi!!
-            var humINT: Int? = hum.toInt()
-            c3.setTitle("$hum %")
-            c3.setSubTitle("Humedad")
-//            c3.setProgress(hum)
-            humINT?.let { c3.setProgress(it) }
 
             var temp2: Double? = postCurrent.first().currentTemp
             temperature = temp2!!.toFloat()
-            thermometer.setCurrentTemp(temperature)
-
-            //val textView: TextView = findViewById(R.id.activity_main) as TextView
-            var tempString: String = temp2.toString()
-            tempView.setText(tempString+" ºC")
-
-
-
-
 
         },failure ={ error ->
 
@@ -144,4 +103,4 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-private fun TextView.setText(tempString: String, function: () -> Unit) {}
+//private fun TextView.setText(tempString: String, function: () -> Unit) {}
