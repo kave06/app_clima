@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ProgressBar;
 import com.example.kave.app_clima.CircularProgressBar.*;
+import com.github.mikephil.charting.charts.LineChart;
 
 
 public class CircularProgressBar extends ProgressBar{

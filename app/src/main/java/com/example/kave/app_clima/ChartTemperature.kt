@@ -1,25 +1,30 @@
 package com.example.kave.app_clima
 
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.widget.CircularProgressDrawable
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.widget.TextView
 import com.beust.klaxon.JsonArray
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Parser
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelError
-
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-//import android.support.v4.widget.SwipeRefreshLayout
-
+import com.github.mikephil.charting.charts.LineChart
 import kotlin.concurrent.*
 
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+
+
 class ChartTemperature : AppCompatActivity() {
+
+    lateinit var lineChart : LineChart
+
+
 
     private var temperature: Float = 0.toFloat() //inicializo temperaura como float
 
@@ -34,10 +39,6 @@ class ChartTemperature : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chart_temperature)
-
-//        mSwipeRefreshLayout = findViewById(R.id.srlContainer) as SwipeRefreshLayout
-
-//        var c3: CircularProgressBar = findViewById(R.id.circularprogressbar1)
 
         setupViews()
         val timer = fixedRateTimer(period=60000.toLong(), daemon=true) {
@@ -95,6 +96,40 @@ class ChartTemperature : AppCompatActivity() {
 
             var temp2: Double? = postCurrent.first().currentTemp
             temperature = temp2!!.toFloat()
+
+
+            lineChart = findViewById(R.id.lineChart)
+
+
+            var yAXES : ArrayList<Entry>? = null
+            var xAXES : ArrayList<Entry>? = null
+
+
+            yAXES?.add(Entry(15f, 1f))
+            yAXES?.add(Entry(16f, 2f))
+            yAXES?.add(Entry(17f, 3f))
+            yAXES?.add(Entry(18f, 4f))
+            yAXES?.add(Entry(19f, 5f))
+            yAXES?.add(Entry(20f, 6f))
+            xAXES?.add(Entry(1f,1f))
+            xAXES?.add(Entry(2f,2f))
+            xAXES?.add(Entry(3f,3f))
+            xAXES?.add(Entry(4f,4f))
+            xAXES?.add(Entry(5f,5f))
+            xAXES?.add(Entry(6f,6f))
+
+
+
+            var lineDataSets : ArrayList<ILineDataSet>? = null
+            var lineDataSet1 : LineDataSet? = LineDataSet(yAXES, "Temperature")
+
+            lineDataSet1?.setDrawCircles(false)
+            lineDataSet1?.setColor(Color.BLUE)
+
+            lineDataSets?.add(lineDataSet1!!)
+
+            val lineData = LineData(lineDataSet1)
+            lineChart.data = lineData
 
         },failure ={ error ->
 
