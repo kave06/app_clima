@@ -21,7 +21,7 @@ import kotlin.concurrent.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var temperature: Float = 0.toFloat()
+    private var temperature: Float = 0.toFloat() //inicializo temperaura como float
 
     lateinit var recyclerView : RecyclerView
     lateinit var recycletViewAdapter : RecyclerView.Adapter<PostAdapterCurrent.ViewHolder>
