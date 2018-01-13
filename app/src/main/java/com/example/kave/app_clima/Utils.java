@@ -12,8 +12,6 @@ import android.util.Log;
  * calling Utils.init(...) before usage. Inside the Chart.init() method, this is
  * done, if the Utils are used before that, Utils.init(...) needs to be called
  * manually.
- *
- * @author Philipp Jahoda
  */
 
 /**

@@ -16,8 +16,6 @@ class PostAdapter(dataSet: List<PostCurrent>) : RecyclerView.Adapter<PostAdapter
     final var onClick : (View)-> Unit = {}
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-//        val titleTextView = view.findViewById<TextView>(R.id.title_text_view) as TextView
-//        val bodyTextView = view.findViewById<TextView>(R.id.body_text_view) as TextView
 
         val textView_tit = view.findViewById<TextView>(R.id.textView_title) as TextView
         val textView_temp = view.findViewById<TextView>(R.id.textView_temperature) as TextView

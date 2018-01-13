@@ -7,13 +7,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.kave.app_clima.ChartTemperature">
 
-
     <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:id="@+id/lineChart">
-    </com.github.mikephil.charting.charts.LineChart>
-
+        android:layout_height="300dp"></com.github.mikephil.charting.charts.LineChart>
 
     <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"
@@ -21,8 +18,7 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:id="@+id/recycler_view_chart_temperature">
-</android.support.v7.widget.RecyclerView>
 
-
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

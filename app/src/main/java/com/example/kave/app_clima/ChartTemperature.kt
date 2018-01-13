@@ -32,9 +32,6 @@ class ChartTemperature : AppCompatActivity() {
     lateinit var recycletViewAdapter : RecyclerView.Adapter<PostAdapterCurrent.ViewHolder>
     lateinit var recyclerViewLayoutManager : RecyclerView.LayoutManager
     var adapter: PostAdapterCurrent? = null
-//    var adapter: PostAdapter? = null
-
-//    var mSwipeRefreshLayout: SwipeRefreshLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +74,6 @@ class ChartTemperature : AppCompatActivity() {
             val parser = Parser()
             val stringBuilder = StringBuilder(response)
             val model =  parser.parse(stringBuilder) as JsonArray<JsonObject>
-//            val postModel  = model.map { PostModel(it)}.filterNotNull()
             val postCurrent  = model.map { PostCurrent(it)}.filterNotNull()
             println("-------------------------------")
             println("postCurrent: " + postCurrent)
@@ -137,5 +133,3 @@ class ChartTemperature : AppCompatActivity() {
     }
 
 }
-
-//private fun TextView.setText(tempString: String, function: () -> Unit) {}

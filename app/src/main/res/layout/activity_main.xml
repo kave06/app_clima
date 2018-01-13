@@ -10,22 +10,22 @@
     <com.example.kave.app_clima.Thermometer
         android:id="@+id/thermometer"
         android:layout_width="150dip"
-        android:layout_height="400dip"
+        android:layout_height="300dip"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="150dp"
-        app:radius="70dp" />
+        android:layout_marginTop="180dip"
+        app:radius="40dip" />
 
     <TextView
         android:id="@+id/tempView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="85dp"
-        android:layout_marginTop="470dp"
+        android:layout_marginLeft="100dip"
+        android:layout_marginTop="430dip"
         android:background="@android:color/transparent"
         android:text="TextView"
         android:textColor="@android:color/white"
-        android:textSize="25sp" />
+        android:textSize="15sp" />
 
     <com.example.kave.app_clima.CircularProgressBar
         android:id="@+id/circularprogressbar1"
@@ -33,6 +33,7 @@
         android:layout_width="150dip"
         android:layout_height="150dip"
         android:layout_alignTop="@+id/thermometer"
+        android:layout_marginRight="5dip"
         android:layout_marginTop="50dp"
         android:layout_toEndOf="@+id/thermometer"
         android:background="@android:color/transparent"
@@ -43,27 +44,24 @@
         app:cpb_progressColor="#1684ce"
         app:cpb_titleColor="#1684ce" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    </android.support.v7.widget.RecyclerView>
+
     <Button
         android:id="@+id/button_chart_temperature"
-        tools:context="com.example.kave.app_clima.ChartTemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chart temperature" />
-
-    <android.support.v7.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:id="@+id/recycler_view">
-</android.support.v7.widget.RecyclerView>
-
-    <!--<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:tools="http://schemas.android.com/tools"-->
-        <!--android:id="@+id/srlContainer"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:context=".MainActivity"></android.support.v4.widget.SwipeRefreshLayout>-->
-
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_margin="50dip"
+        android:layout_marginTop="100dip"
+        android:text="Chart temperature"
+        tools:context="com.example.kave.app_clima.ChartTemperature" />
 
 </RelativeLayout>
